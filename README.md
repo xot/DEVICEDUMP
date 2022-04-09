@@ -12,8 +12,8 @@ Dumps two files in the user home directory, or in a sub-directory specified in t
 
 ## Installation
 
-Copy ```__init.py__``` and ```DEVICEDUMP.py``` to your local Ableton MIDI Live Scripts folder (```~/Music/Ableton/User Library/Remote Scripts/'``` on MacOS and
-```~\Documents\Ableton\User Library\Remote Scripts ``` on Windows).
+Copy ```__init.py__``` and ```DEVICEDUMP.py``` to your local Ableton MIDI Live Scripts folder (```~/Music/Ableton/User Library/Remote Scripts/``` on MacOS and
+```~\Documents\Ableton\User Library\Remote Scripts``` on Windows).
 
 Add DEVICEDUMP as a COntrol Surface in Live > Preferences > MIDI.
 
