@@ -47,20 +47,19 @@ class DEVICEDUMP(ControlSurface):
             name = device.class_name 
             home = os.path.expanduser("~")                                            # get home directory in device independent way: https://stackoverflow.com/questions/4028904/what-is-the-correct-cross-platform-way-to-get-the-home-directory-in-python
             path =  home + '/' + LOCALDIR
-            if os.path.exists(path):
-                self.log_message("dumping device: " + name)
-                fname = path + '/' + name + '.dump'
-                with open(fname,'w') as f:            
-                    parameters = device.parameters
-                    for p in parameters:
-                        s = parameterdescription(p)
-                        f.write(s)
-                fname = path + '/' + name + '.parameternames'
-                with open(fname,'w') as f:            
-                    parameters = device.parameters
-                    for p in parameters:
-                        s = "'" + p.original_name + "',\n"
-                        f.write(s)
-            else:
-                self.log_message("path does not exist: " + path)                
+            if not os.path.exists(path):
+                path = home
+            self.log_message("dumping device: " + name)
+            fname = path + '/' + name + '.dump'
+            with open(fname,'w') as f:            
+                parameters = device.parameters
+                for p in parameters:
+                    s = parameterdescription(p)
+                    f.write(s)
+            fname = path + '/' + name + '.parameternames'
+            with open(fname,'w') as f:            
+                parameters = device.parameters
+                for p in parameters:
+                    s = "'" + p.original_name + "',\n"
+                    f.write(s)
 
