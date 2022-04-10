@@ -18,14 +18,13 @@ LOCALDIR = 'src/ableton-control-scripts/DEVICEDUMP/dumps'
 
 def parameterdescription(p):
     l =     [f'{p.name} ({p.original_name}):\n']
-    l = l + [f'Min: {p.str_for_value(p.min)} ({p.min})\n']
-    l = l + [f'Cur: {p.str_for_value(p.value)} ({p.value})\n']
-    l = l + [f'Max: {p.str_for_value(p.max)} ({p.max})\n']
+    l = l + [f'  Min: {p.str_for_value(p.min)} ({p.min})\n']
+    l = l + [f'  Cur: {p.str_for_value(p.value)} ({p.value})\n']
+    l = l + [f'  Max: {p.str_for_value(p.max)} ({p.max})\n']
     if p.is_quantized:
-        l = l + ['Possible values: ']
+        l = l + ['  Possible values: ']
         l = l + [', '.join(p.value_items)]
         l = l + ['\n']
-    l = l + ['\n']
     return ''.join(l)
 
 class DEVICEDUMP(ControlSurface):
