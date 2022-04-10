@@ -8,7 +8,7 @@
 #
 
 # Python imorts
-import os 
+import os,sys
 
 # Ableton Live imports
 from _Framework.ControlSurface import ControlSurface
@@ -17,20 +17,16 @@ from _Framework.ControlSurface import ControlSurface
 LOCALDIR = 'src/ableton-control-scripts/DEVICEDUMP/dumps'
 
 def parameterdescription(p):
-    s = p.name + '(' + p.original_name + '):\n  '
-    s = s + 'Min: ' + p.str_for_value(p.min) + ' (' + str(p.min) + ')\n  '
-    s = s + 'Cur: ' + p.str_for_value(p.value) + ' (' + str(p.value) + ')\n  '
-    s = s + 'Max: ' + p.str_for_value(p.max) + ' (' + str(p.max) + ')'
+    l =     [f'{p.name} ({p.original_name}):\n']
+    l = l + [f'Min: {p.str_for_value(p.min)} ({p.min})\n']
+    l = l + [f'Cur: {p.str_for_value(p.value)} ({p.value})\n']
+    l = l + [f'Max: {p.str_for_value(p.max)} ({p.max})\n']
     if p.is_quantized:
-        s = s + '\n  Possible values: '
-        first = True
-        for v in p.value_items:
-            if not first:
-                s = s + ", "
-            first = False
-            s = s + str(v) 
-    s = s + '\n'
-    return s
+        l = l + ['Possible values: ']
+        l = l + [', '.join(p.value_items)]
+        l = l + ['\n']
+    l = l + ['\n']
+    return ''.join(l)
 
 class DEVICEDUMP(ControlSurface):
     u""" Script to dump the parameters of the currently selected device """
@@ -39,6 +35,7 @@ class DEVICEDUMP(ControlSurface):
         super(DEVICEDUMP, self).__init__(*a, **k)
         self._appointed_device = None
         self.log_message("DEVICEDUMP loaded.")
+        self.log_message("Python version." + sys.version)        
 
     def update_display(self):
         device = self.song().appointed_device
